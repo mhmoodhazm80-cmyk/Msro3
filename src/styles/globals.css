@@ -5,7 +5,6 @@
 @layer base {
   html { scroll-behavior: smooth; }
   body { font-family: 'Cairo', system-ui, sans-serif; }
-  [dir='ltr'] body { font-family: 'Poppins', system-ui, sans-serif; }
   ::selection { background: #7c4dff; color: #fff; }
   ::-webkit-scrollbar { width: 8px; }
   ::-webkit-scrollbar-track { background: #f3f1ff; }
@@ -19,61 +18,11 @@
     background-clip: text;
     -webkit-text-fill-color: transparent;
   }
-  .bg-grid {
-    background-image:
-      linear-gradient(rgba(124, 77, 255, 0.05) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(124, 77, 255, 0.05) 1px, transparent 1px);
-    background-size: 40px 40px;
-  }
 }
 
-/* Animations */
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(30px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-@keyframes floatY {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-15px); }
-}
-@keyframes pulseGlow {
-  0%, 100% { opacity: 0.5; transform: scale(1); }
-  50% { opacity: 0.8; transform: scale(1.1); }
-}
-@keyframes rotateSlow {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
-@keyframes logoBreath {
-  0%, 100% { transform: scale(1) rotate(0deg); }
-  50% { transform: scale(1.05) rotate(1.5deg); }
-}
-@keyframes shimmer {
-  0% { background-position: -1000px 0; }
-  100% { background-position: 1000px 0; }
-}
-
-.animate-fade-up { animation: fadeUp 0.8s ease-out both; }
-.animate-fade-in { animation: fadeIn 1s ease-out both; }
-.animate-float { animation: floatY 6s ease-in-out infinite; }
-.animate-pulse-glow { animation: pulseGlow 6s ease-in-out infinite; }
-.animate-rotate-slow { animation: rotateSlow 40s linear infinite; }
-.animate-logo-breath { animation: logoBreath 6s ease-in-out infinite; }
-
-.delay-100 { animation-delay: 0.1s; }
-.delay-200 { animation-delay: 0.2s; }
-.delay-300 { animation-delay: 0.3s; }
-.delay-400 { animation-delay: 0.4s; }
-.delay-500 { animation-delay: 0.5s; }
-
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-  }
+/* ضمان ظهور المحتوى دايماً */
+html, body {
+  background: #f7f7f8;
+  color: #1a1a24;
+  min-height: 100vh;
 }
