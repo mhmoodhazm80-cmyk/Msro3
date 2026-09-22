@@ -1,31 +1,40 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
-import { useInView } from 'framer-motion';
 import { useTranslations } from 'next-intl';
 import { site } from '@/config/site';
 
 function Counter({ to }) {
   const ref = useRef(null);
-  const inView = useInView(ref, { once: true, margin: '-100px' });
   const [count, setCount] = useState(0);
+  const started = useRef(false);
 
   useEffect(() => {
-    if (inView) {
-      let current = 0;
-      const step = to / 40;
-      const interval = setInterval(() => {
-        current += step;
-        if (current >= to) {
-          setCount(to);
-          clearInterval(interval);
-        } else {
-          setCount(Math.floor(current));
+    if (!ref.current || started.current) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting && !started.current) {
+          started.current = true;
+          let current = 0;
+          const step = to / 40;
+          const interval = setInterval(() => {
+            current += step;
+            if (current >= to) {
+              setCount(to);
+              clearInterval(interval);
+            } else {
+              setCount(Math.floor(current));
+            }
+          }, 30);
         }
-      }, 30);
-      return () => clearInterval(interval);
-    }
-  }, [inView, to]);
+      },
+      { threshold: 0.3 }
+    );
+
+    observer.observe(ref.current);
+    return () => observer.disconnect();
+  }, [to]);
 
   return <span ref={ref}>{count}</span>;
 }
