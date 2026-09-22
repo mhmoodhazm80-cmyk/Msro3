@@ -29,7 +29,7 @@ export default function ServicesGrid({ limit }) {
               <Link
                 key={service.slug}
                 href={`/${locale}/services/${service.slug}`}
-                className="group relative block h-full p-8 rounded-2xl bg-ink-50 border border-ink-100 hover:border-brand-300 hover:bg-white hover:shadow-[0_20px_60px_rgba(124,77,255,0.12)] transition-all duration-500 overflow-hidden"
+                className="group relative block h-full p-8 rounded-2xl bg-ink-50 border border-ink-100 hover:border-brand-300 hover:bg-white hover:shadow-[0_20px_60px_rgba(124,77,255,0.12)] hover:-translate-y-1 transition-all duration-500 overflow-hidden"
               >
                 <div className="relative">
                   <div className="w-14 h-14 rounded-xl bg-brand-100 text-brand-600 flex items-center justify-center mb-6 group-hover:bg-brand-500 group-hover:text-white transition-all duration-500">
