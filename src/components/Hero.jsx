@@ -1,6 +1,5 @@
 'use client';
 
-import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { useLocale, useTranslations } from 'next-intl';
 import { ArrowLeft, ArrowRight, Sparkles } from 'lucide-react';
@@ -13,8 +12,8 @@ export default function Hero() {
 
   return (
     <section className="relative min-h-screen flex items-center overflow-hidden bg-grid pt-32 pb-20">
-      <div className="absolute top-20 start-1/4 w-[500px] h-[500px] bg-brand-300/40 blur-[120px] rounded-full" />
-      <div className="absolute bottom-0 end-1/4 w-[400px] h-[400px] bg-brand-500/30 blur-[120px] rounded-full" />
+      <div className="absolute top-20 start-1/4 w-[500px] h-[500px] bg-brand-300/40 blur-[120px] rounded-full animate-pulse" />
+      <div className="absolute bottom-0 end-1/4 w-[400px] h-[400px] bg-brand-500/30 blur-[120px] rounded-full animate-pulse" />
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
         <div className="max-w-4xl">
