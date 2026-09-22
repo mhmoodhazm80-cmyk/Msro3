@@ -1,24 +1,33 @@
 'use client';
 
-import { motion, useInView, useMotionValue, useTransform, animate } from 'framer-motion';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import { useInView } from 'framer-motion';
 import { useTranslations } from 'next-intl';
 import { site } from '@/config/site';
 
 function Counter({ to }) {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: '-100px' });
-  const count = useMotionValue(0);
-  const rounded = useTransform(count, (v) => Math.floor(v));
+  const [count, setCount] = useState(0);
 
   useEffect(() => {
     if (inView) {
-      const controls = animate(count, to, { duration: 1.8, ease: [0.22, 1, 0.36, 1] });
-      return controls.stop;
+      let current = 0;
+      const step = to / 40;
+      const interval = setInterval(() => {
+        current += step;
+        if (current >= to) {
+          setCount(to);
+          clearInterval(interval);
+        } else {
+          setCount(Math.floor(current));
+        }
+      }, 30);
+      return () => clearInterval(interval);
     }
-  }, [inView, to, count]);
+  }, [inView, to]);
 
-  return <motion.span ref={ref}>{rounded}</motion.span>;
+  return <span ref={ref}>{count}</span>;
 }
 
 export default function StatsSection() {
@@ -35,12 +44,15 @@ export default function StatsSection() {
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-8">
           {stats.map((stat, i) => (
-            <motion.div key={i} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: i * 0.15 }} className="text-center">
+            <div key={i} className="text-center">
               <div className="text-5xl sm:text-6xl md:text-7xl font-bold text-white mb-3">
-                <Counter to={stat.value} /><span className="text-brand-400">{stat.suffix}</span>
+                <Counter to={stat.value} />
+                <span className="text-brand-400">{stat.suffix}</span>
               </div>
-              <div className="text-ink-300 text-sm sm:text-base tracking-wide">{stat.label}</div>
-            </motion.div>
+              <div className="text-ink-300 text-sm sm:text-base tracking-wide">
+                {stat.label}
+              </div>
+            </div>
           ))}
         </div>
       </div>
