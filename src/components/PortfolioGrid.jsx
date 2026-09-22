@@ -26,7 +26,7 @@ export default function PortfolioGrid({ limit }) {
             <Link
               key={project.slug}
               href={`/${locale}/portfolio/${project.slug}`}
-              className="group relative block rounded-2xl overflow-hidden bg-white border border-ink-100 hover:border-brand-300 transition-all duration-500 hover:shadow-[0_30px_80px_rgba(124,77,255,0.15)]"
+              className="group relative block rounded-2xl overflow-hidden bg-white border border-ink-100 hover:border-brand-300 transition-all duration-500 hover:shadow-[0_30px_80px_rgba(124,77,255,0.15)] hover:-translate-y-1"
             >
               <div className="relative aspect-[16/10] overflow-hidden bg-ink-100">
                 <Image src={project.image} alt={tn(project.slug)} fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover transition-transform duration-700 group-hover:scale-105" />
