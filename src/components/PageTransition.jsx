@@ -1,4 +1,4 @@
-// نسخة مبسطة - بدون أنيميشن معقد
+// معطل — بنستخدم CSS بدل framer-motion
 'use client';
 
 export default function PageTransition({ children }) {
